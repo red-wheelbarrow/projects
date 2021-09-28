@@ -88,7 +88,7 @@ SSH into the control node and follow the steps below:
 - Update your hosts file to include the relevant machine IPs
 - Update your ansible.cfg file with the appropriate remote username
 - Update the complete-playbook.yml file to add/remove functionality as required
-- Copy the beat config files filebeat-config.yml, metricbeat-config.yml (located in playbook directory) into /etc/ansible/files 
+- Copy the beat config files filebeat-config.yml, metricbeat-config.yml (located in playbook directory) into /etc/ansible/files on your Ansible control node
 - Run the complete-playbook.yml playbook and navigate to the associated machines to check that the installation worked as expected.
 - Navigate to [your.elkserver.public.IP]:5601/app/kibana#/home to ensure ELK stack configuration was successful
 
