@@ -39,57 +39,56 @@ The configuration details of each machine may be found below.
 
 The machines on the internal network are not exposed to the public Internet.
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the Load Balancer can accept public connections, and only over HTTP.  This ensures a secure architecture by not allowing users to connect directly to the individual DVWA containers.
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+The Elk Server and Jump Box have publicly facing IPs as well, however access is limited to a single IP address and filtered by protocol.
+
+Machines within the network can only be accessed by the Jump Box over SSH with asymmetric encryption.
 
 A summary of the access policies in place can be found in the table below.
 
 | Name       | Publicly Accessible | Allowed IP Addresses |
 |------------|---------------------|----------------------|
-| Jump Box   | No (SSH)           | My Public IP         |
-| Web-1      |                     |                      |
-| Web-2      |                     |                      |
-| Web-3      |                     |                      |
-| Elk Server |                     |                      |
+| Jump Box   | YES (SSH)           | Admin's public IP    |
+| Web-1      | NO                  | 10.0.0.7             |
+| Web-2      | NO                  | 10.0.0.7             |
+| Web-3      | NO                  | 10.0.0.7             |
+| Elk Server | YES                 | Admin's public IP    |
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because it eliminates the probability of user error when deploying multiple machines, or easily duplicating the network configuration.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- _Installs DVWA on the Web VMs_
+- _Installs an ELK stack on the Elk Server_
+- _Installs Filebeat & Metricbeat on the Web VMs_
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+![screenshot of docker ps output](Images/elk-docker-ps.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- _Web-1 10.0.0.8_
+- _Web-1 10.0.0.9_
+- _Web-1 10.0.0.4_
 
 I have installed the following Beats on these machines:
 - _Filebeat_
 - _Metricbeat_
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- _System log file changes (Filebeat) and system resource utilization (Metricbeat)_
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned:
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
-
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
+- Copy the complete-playbook.yml file to the /etc/ansible directory
+- Update your hosts file to include the relevant machine IPs
+- Update your ansible.cfg file with the appropriate remote username
+- Update the complete-playbook.yml file to add/remove functionality as required
+- Run the playbook, and navigate to the associated machines to check that the installation worked as expected.
+- Navigate to [your.elkserver.public.IP]:5601/app/kibana#/home to ensure ELK stack configuration was successful
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
