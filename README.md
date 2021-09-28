@@ -27,11 +27,10 @@ The Jump Box acts as a management gateway to securely make changes to each of th
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the log files and system resource utilization.  Filebeat provides the former, while Metricbeat provides the latter functionality.
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name        | Function    | IP Address | Operating System |
 |-------------|-------------|------------|------------------|
-| Jump Box    | Gateway     |  10.0.0.7  |      Linux       |
+|  Jump Box   | Gateway     |  10.0.0.7  |      Linux       |
 |  Web-1      | DVWA Server |  10.0.0.8  |      Linux       |  
 |  Web-2      | DVWA Server |  10.0.0.9  |      Linux       |
 |  Web-3      | DVWA Server |  10.0.0.4  |      Linux       |
@@ -48,12 +47,13 @@ Machines within the network can only be accessed by _____.
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
-
+| Name       | Publicly Accessible | Allowed IP Addresses |
+|------------|---------------------|----------------------|
+| Jump Box   | No (SSH)           | My Public IP         |
+| Web-1      |                     |                      |
+| Web-2      |                     |                      |
+| Web-3      |                     |                      |
+| Elk Server |                     |                      |
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
@@ -72,8 +72,9 @@ The following screenshot displays the result of running `docker ps` after succes
 This ELK server is configured to monitor the following machines:
 - _TODO: List the IP addresses of the machines you are monitoring_
 
-We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+I have installed the following Beats on these machines:
+- _Filebeat_
+- _Metricbeat_
 
 These Beats allow us to collect the following information from each machine:
 - _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
