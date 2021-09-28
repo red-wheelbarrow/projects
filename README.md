@@ -88,7 +88,7 @@ SSH into the control node and follow the steps below:
 - Update your hosts file to include the relevant machine IPs
 - Update your ansible.cfg file with the appropriate remote username
 - Update the complete-playbook.yml file to add/remove functionality as required
-- Run the playbook, and navigate to the associated machines to check that the installation worked as expected.
+- Run the playbook, run the provided beat-config playbooks (located in the playbook directory), and navigate to the associated machines to check that the installation worked as expected.
 - Navigate to [your.elkserver.public.IP]:5601/app/kibana#/home to ensure ELK stack configuration was successful
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
