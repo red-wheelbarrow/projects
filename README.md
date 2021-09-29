@@ -6,7 +6,7 @@ The files in this repository were used to configure the network depicted below.
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above, or alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat.
 
- [complete playbook file](playbooks/complete-deployment.yml)
+ [complete playbook file](Playbooks/complete-deployment.yml)
 
 This document contains the following details:
 - Description of the Topology
@@ -15,7 +15,8 @@ This document contains the following details:
   - Beats in Use
   - Machines Being Monitored
 - How to Use the Ansible Build
-
+- Also included are the requisite ansible.cfg and hosts files (located in the Ansible Config Files directory)
+- Lastly, there is a Linux Scripts folder containing 4 scripts for updating, cleaning, and doing some basic system auditing
 
 ### Description of the Topology
 
@@ -24,17 +25,17 @@ The main purpose of this network is to expose a load-balanced and monitored inst
 Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
 The Jump Box acts as a management gateway to securely make changes to each of the VMs.
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the log files and system resource utilization.  Filebeat provides the former, while Metricbeat provides the latter functionality.
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the associated log files and view system resource utilization.  Filebeat provides the former, while Metricbeat provides the latter functionality.
 
 The configuration details of each machine may be found below.
 
-| Name        | Function    | IP Address | Operating System |
-|-------------|-------------|------------|------------------|
-|  Jump Box   | Gateway     |  10.0.0.7  |      Linux       |
-|  Web-1      | DVWA Server |  10.0.0.8  |      Linux       |  
-|  Web-2      | DVWA Server |  10.0.0.9  |      Linux       |
-|  Web-3      | DVWA Server |  10.0.0.4  |      Linux       |
-|  Elk Server | Monitoring  |  10.1.0.4  |      Linux       |
+| Name        | Function    | IP Address | Operating System   |
+|-------------|-------------|------------|--------------------|
+|  Jump Box   | Gateway     |  10.0.0.7  |Linux (Ubuntu 20.04)|
+|  Web-1      | DVWA Server |  10.0.0.8  |Linux (Ubuntu 20.04)|  
+|  Web-2      | DVWA Server |  10.0.0.9  |Linux (Ubuntu 20.04)|
+|  Web-3      | DVWA Server |  10.0.0.4  |Linux (Ubuntu 20.04)|
+|  Elk Server | Monitoring  |  10.1.0.4  |Linux (Ubuntu 20.04)|
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet.
@@ -88,8 +89,6 @@ SSH into the control node and follow the steps below:
 - Update your hosts file to include the relevant machine IPs
 - Update your ansible.cfg file with the appropriate remote username
 - Update the complete-playbook.yml file to add/remove functionality as required
-- Copy the beat config files filebeat-config.yml, metricbeat-config.yml (located in playbook directory) into /etc/ansible/files on your Ansible control node
+- Copy the beat config files filebeat-config.yml, metricbeat-config.yml (located in Beat Config Files directory) into /etc/ansible/files on your Ansible control node
 - Run the complete-playbook.yml playbook and navigate to the associated machines to check that the installation worked as expected.
 - Navigate to [your.elkserver.public.IP]:5601/app/kibana#/home to ensure ELK stack configuration was successful
-
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
